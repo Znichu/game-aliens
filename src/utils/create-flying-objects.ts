@@ -6,17 +6,17 @@ import {
 } from './constant';
 import {InitialStateType} from "../store/game-reducer";
 
-export default (state: InitialStateType) => {
-    if ( ! state.started) return state; // игра не запущена
+export const createFlyingObject = (state: InitialStateType) => {
+    if (!state.started) return state; // игра не запущена
 
     const now = (new Date()).getTime();
-    const { lastObjectCreatedAt, flyingObjects } = state.gameState;
+    const {lastObjectCreatedAt, flyingObjects} = state;
     const createNewObject = (
         now - (lastObjectCreatedAt).getTime() > createInterval &&
         flyingObjects.length < maxFlyingObjects
     );
 
-    if ( ! createNewObject) return state; // нет нужды создавать новые объекты в данный момент
+    if (!createNewObject) return state; // нет нужды создавать новые объекты в данный момент
 
     const id = (new Date()).getTime();
     const predefinedPosition = Math.floor(Math.random() * maxFlyingObjects);
@@ -32,13 +32,10 @@ export default (state: InitialStateType) => {
 
     return {
         ...state,
-        gameState: {
-            ...state.gameState,
-            flyingObjects: [
-                ...state.gameState.flyingObjects,
-                newFlyingObject
-            ],
-            lastObjectCreatedAt: new Date(),
-        }
+        flyingObjects: [
+            ...state.flyingObjects,
+            newFlyingObject
+        ],
+        lastObjectCreatedAt: new Date(),
     }
 }

@@ -5,7 +5,9 @@ let initialState = {
     angle: 45,
     started: false,
     kills: 0,
-    lives: 3
+    lives: 3,
+    flyingObjects: [],
+    lastObjectCreatedAt: new Date(),
 };
 
 //Reducer
