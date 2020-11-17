@@ -15,13 +15,14 @@ import {actions} from "../store/game-reducer";
 
 type PropsType = {
     trackMouse: (event: React.MouseEvent<SVGSVGElement, MouseEvent>) => void
+    shootBall: () => void
 }
 
 
-export const Canvas: React.FC<PropsType> = ({trackMouse}) => {
+export const Canvas: React.FC<PropsType> = ({trackMouse, shootBall}) => {
     const dispatch = useDispatch();
 
-    const {angle: rotation, started, flyingObjects}= useSelector((state: RootState) => state.game)
+    const {angle: rotation, started, flyingObjects, cannonBalls}= useSelector((state: RootState) => state.game)
 
     const viewBox = [window.innerWidth / -2, 100 -gameHeight, window.innerWidth, gameHeight].join();
 
@@ -35,6 +36,7 @@ export const Canvas: React.FC<PropsType> = ({trackMouse}) => {
             preserveAspectRatio="xMaxYMax none"
             viewBox={viewBox}
             onMouseMove={(event) => trackMouse(event)}
+            onClick={shootBall}
 
         >
             <defs>
@@ -45,15 +47,12 @@ export const Canvas: React.FC<PropsType> = ({trackMouse}) => {
 
             <Sky/>
             <Ground/>
+            {cannonBalls.map(ball =><CannonBall key={ball.id} position={ball.position}/>)}
             <CannonPipe rotation={rotation}/>
             <CannonBase/>
-            <CannonBall position={positionBall}/>
             <CurrentScore score={15}/>
-
             {!started && <StartGame startGame={startGame}/>}
-
-            <Heart position={{x: -300, y: 35}}/>
-
+            <Heart position={{x: -300, y: 55}}/>
             {flyingObjects.map(obj => <FlyingObject key={obj.id} position={obj.position}/>)}
         </svg>
     );

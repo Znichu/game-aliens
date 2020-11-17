@@ -10,8 +10,14 @@ export type CubicBezierCurveType = {
     endingAxis: ObjectPositionType
 }
 
-export type FlyingObjectsType = {
+export type FlyingObjectType = {
     position: ObjectPositionType
     createdAt: number
+    id: string
+}
+
+export type CannonBallType = {
+    position: ObjectPositionType
+    angle: number
     id: string
 }

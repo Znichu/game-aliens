@@ -1,9 +1,7 @@
 import {CubicBezierCurveType} from "./types";
 
 export const pathFromBezierCurve = (cubicBezierCurve: CubicBezierCurveType) => {
-    const {
-        initialAxis, initialControlPoint, endingControlPoint, endingAxis,
-    } = cubicBezierCurve;
+    const {initialAxis, initialControlPoint, endingControlPoint, endingAxis} = cubicBezierCurve;
     return `
     M${initialAxis.x} ${initialAxis.y}
     c ${initialControlPoint.x} ${initialControlPoint.y}
@@ -38,4 +36,16 @@ export const getCanvasPosition = (event: any) => {
     // @ts-ignore
     const { x, y } = point.matrixTransform(svg?.getScreenCTM().inverse());
     return {x, y};
+};
+
+const degreesToRadian = (degrees: number) => ((degrees * Math.PI) / 180);
+
+export const calculateNextPosition = (x: number, y: any, angle: number, divisor = 300) => {
+    const realAngle = (angle * -1) + 90;
+    const stepsX = radiansToDegrees(Math.cos(degreesToRadian(realAngle))) / divisor;
+    const stepsY = radiansToDegrees(Math.sin(degreesToRadian(realAngle))) / divisor;
+    return {
+        x: x + stepsX,
+        y: y - stepsY,
+    }
 };

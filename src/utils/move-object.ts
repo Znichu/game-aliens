@@ -1,8 +1,11 @@
 import {calculateAngle} from './formula';
 import {InitialStateType} from "../store/game-reducer";
 import {createFlyingObject} from "./create-flying-objects";
+import {moveBalls} from "./move-cannon-ball";
 
 export const moveObjects = (state: InitialStateType, action: any) => {
+    let cannonBalls = moveBalls(state.cannonBalls);
+
     const mousePosition = action.mousePosition || {
         x: 0,
         y: 0
@@ -20,6 +23,7 @@ export const moveObjects = (state: InitialStateType, action: any) => {
     return {
         ...newState,
         flyingObjects: newFlyingObjects,
+        cannonBalls: cannonBalls,
         angle,
 
     };

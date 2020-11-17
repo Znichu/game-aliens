@@ -1,14 +1,16 @@
 import {InferActionTypes} from "./store";
 import {moveObjects} from "../utils/move-object";
-import {FlyingObjectsType} from "../utils/types";
+import {CannonBallType, FlyingObjectType} from "../utils/types";
+import {shoot} from "../utils/shoot";
 
 let initialState = {
     angle: 45,
     started: false,
     kills: 0,
     lives: 3,
-    flyingObjects: [] as FlyingObjectsType[],
+    flyingObjects: [] as FlyingObjectType[],
     lastObjectCreatedAt: new Date(),
+    cannonBalls: [] as CannonBallType[]
 };
 
 //Reducer
@@ -23,6 +25,9 @@ export const GameReducer = (state = initialState, action: ActionsTypes): Initial
                 started: true
             }
         }
+        case "SHOOT_BALL": {
+            return shoot(state, action)
+        }
         default:
             return state;
     }
@@ -31,7 +36,8 @@ export const GameReducer = (state = initialState, action: ActionsTypes): Initial
 //Actions
 export const actions = {
     moveObject: (mousePosition: { x: number; y: number }) => ({ type: "MOVE_OBJECT", mousePosition} as const),
-    runGame: () => ({type: "RUN_GAME"} as const)
+    runGame: () => ({type: "RUN_GAME"} as const),
+    shooBall: (mousePosition: { x: number; y: number }) => ({type: "SHOOT_BALL", mousePosition} as const)
 };
 
 

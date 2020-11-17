@@ -36,8 +36,12 @@ export const Game = () => {
         canvasMousePosition = getCanvasPosition(event);
     }
 
+    const shootBall = () => {
+        dispatch(actions.shooBall(canvasMousePosition))
+    }
+
     return (
-        <Canvas trackMouse={trackMouse}/>
+        <Canvas trackMouse={trackMouse} shootBall={shootBall}/>
     );
 }
 

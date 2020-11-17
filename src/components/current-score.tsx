@@ -8,13 +8,20 @@ export const CurrentScore: React.FC<PropsType> = ({score}) => {
 
     const scoreStyle = {
         fontSize: 65,
-        fill: '#B00D23',
+        fill: '#ff0',
     };
+    const textStyle = {
+        fontSize: 55,
+        fill: '#fff'
+    }
 
     return (
         <g filter="url(#shadow)">
-            <text style={scoreStyle} x="300" y="80">
-                score: {score}
+            <text style={textStyle} x="300" y="80">
+                score:
+            </text>
+            <text style={scoreStyle} x="500" y="80">
+                 {score}
             </text>
         </g>
     );

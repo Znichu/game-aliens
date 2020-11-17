@@ -24,7 +24,7 @@ export const StartGame: React.FC<PropsType> = ({startGame}) => {
     const text = {
         textAnchor: 'middle', // центр
         x: 0, // центр относительно оси X
-        y: -150, // 150 выше нуля (по оси Y)
+        y: -450, // 150 выше нуля (по оси Y)
         style: {
             fontSize: 60,
             fill: '#e3e3e3',
