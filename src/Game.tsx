@@ -22,6 +22,16 @@ export const Game = () => {
         }
     }, []);
 
+    useEffect(() => {
+        window.onresize = () => {
+            const cnv: any = document.getElementById('aliens-canvas');
+            cnv.style.width = `${window.innerWidth}px`;
+            cnv.style.height = `${window.innerHeight}px`;
+        };
+        // @ts-ignore
+        window.onresize();
+    })
+
     const trackMouse = (event: React.MouseEvent<SVGSVGElement, MouseEvent>) => {
         canvasMousePosition = getCanvasPosition(event);
     }
