@@ -6,7 +6,7 @@ import {CannonBase} from "./cannon-base";
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../store/store";
 import {CannonBall} from "./cannon-ball";
-import {gameHeight, positionBall} from "../utils/constant";
+import {gameHeight} from "../utils/constant";
 import {CurrentScore} from "./current-score";
 import {FlyingObject} from "./flying-object";
 import {Heart} from "./heart";

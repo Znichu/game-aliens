@@ -2,8 +2,10 @@ import {calculateAngle} from './formula';
 import {InitialStateType} from "../store/game-reducer";
 import {createFlyingObject} from "./create-flying-objects";
 import {moveBalls} from "./move-cannon-ball";
+import {checkCollisions} from "./check-collisions";
 
 export const moveObjects = (state: InitialStateType, action: any) => {
+    if (!state.started) return state;
     let cannonBalls = moveBalls(state.cannonBalls);
 
     const mousePosition = action.mousePosition || {
@@ -12,19 +14,26 @@ export const moveObjects = (state: InitialStateType, action: any) => {
     };
 
     const newState = createFlyingObject(state);
-
     const now= (new Date()).getTime();
-    const newFlyingObjects = newState.flyingObjects.filter(obj => (
-        (now - obj.createdAt) < 4000
+
+    let flyingObjects = newState.flyingObjects.filter(object => (
+        (now - object.createdAt) < 4000
     ));
 
     const {x, y} = mousePosition;
     const angle = calculateAngle(0, 0, x, y);
+
+    const objectsDestroyed = checkCollisions(cannonBalls, flyingObjects);
+    const cannonBallsDestroyed = objectsDestroyed.map(object => (object.cannonBallId));
+    const flyingDiscsDestroyed = objectsDestroyed.map(object => (object.flyingDiscId));
+
+    cannonBalls = cannonBalls.filter(cannonBall => (cannonBallsDestroyed.indexOf(cannonBall.id)));
+    flyingObjects = flyingObjects.filter(flyingDisc => (flyingDiscsDestroyed.indexOf(flyingDisc.id)));
+
     return {
         ...newState,
-        flyingObjects: newFlyingObjects,
-        cannonBalls: cannonBalls,
+        flyingObjects,
+        cannonBalls,
         angle,
-
     };
 }

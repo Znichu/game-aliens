@@ -49,3 +49,8 @@ export const calculateNextPosition = (x: number, y: any, angle: number, divisor 
         y: y - stepsY,
     }
 };
+
+export const checkCollision = (rectA: any, rectB: any) => (
+    rectA.x1 < rectB.x2 && rectA.x2 > rectB.x1 &&
+    rectA.y1 < rectB.y2 && rectA.y2 > rectB.y1
+);

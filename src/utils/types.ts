@@ -1,6 +1,6 @@
 export type ObjectPositionType = {
-    x: number | string | any
-    y: number | string
+    x: number
+    y: number
 }
 
 export type CubicBezierCurveType = {
@@ -20,4 +20,9 @@ export type CannonBallType = {
     position: ObjectPositionType
     angle: number
     id: string
+}
+
+export type ObjectsDestroyedType = {
+    cannonBallId: string
+    flyingDiscId: string
 }
