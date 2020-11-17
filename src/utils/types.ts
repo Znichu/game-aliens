@@ -1,5 +1,5 @@
 export type ObjectPositionType = {
-    x: number | string
+    x: number | string | any
     y: number | string
 }
 

@@ -7,6 +7,8 @@ import {useSelector} from "react-redux";
 import {RootState} from "../store/store";
 import {CannonBall} from "./cannon-ball";
 import {positionBall} from "../utils/constant";
+import {CurrentScore} from "./current-score";
+import {FlyingObject} from "./flying-object";
 
 type PropsType = {
     trackMouse: (event: React.MouseEvent<SVGSVGElement, MouseEvent>) => void
@@ -27,11 +29,21 @@ export const Canvas: React.FC<PropsType> = ({trackMouse}) => {
             onMouseMove={(event) => trackMouse(event)}
 
         >
-            <Sky />
-            <Ground />
-            <CannonPipe rotation={rotation} />
-            <CannonBase />
+            <defs>
+                <filter id="shadow">
+                    <feDropShadow dx="1" dy="1" stdDeviation="2"/>
+                </filter>
+            </defs>
+
+            <Sky/>
+            <Ground/>
+            <CannonPipe rotation={rotation}/>
+            <CannonBase/>
             <CannonBall position={positionBall}/>
+            <CurrentScore score={15}/>
+
+            <FlyingObject position={{x: -150, y: -500}}/>
+            <FlyingObject position={{x: 150, y: -500}}/>
         </svg>
     );
 };
