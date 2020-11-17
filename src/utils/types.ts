@@ -9,3 +9,9 @@ export type CubicBezierCurveType = {
     endingControlPoint: ObjectPositionType
     endingAxis: ObjectPositionType
 }
+
+export type FlyingObjectsType = {
+    position: ObjectPositionType
+    createdAt: number
+    id: string
+}

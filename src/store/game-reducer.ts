@@ -1,12 +1,13 @@
 import {InferActionTypes} from "./store";
 import {moveObjects} from "../utils/move-object";
+import {FlyingObjectsType} from "../utils/types";
 
 let initialState = {
     angle: 45,
     started: false,
     kills: 0,
     lives: 3,
-    flyingObjects: [],
+    flyingObjects: [] as FlyingObjectsType[],
     lastObjectCreatedAt: new Date(),
 };
 

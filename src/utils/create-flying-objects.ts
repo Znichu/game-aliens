@@ -5,6 +5,7 @@ import {
     flyingObjectsStarterPositions
 } from './constant';
 import {InitialStateType} from "../store/game-reducer";
+import { v4 as uuidv4 } from 'uuid';
 
 export const createFlyingObject = (state: InitialStateType) => {
     if (!state.started) return state; // игра не запущена
@@ -18,7 +19,6 @@ export const createFlyingObject = (state: InitialStateType) => {
 
     if (!createNewObject) return state; // нет нужды создавать новые объекты в данный момент
 
-    const id = (new Date()).getTime();
     const predefinedPosition = Math.floor(Math.random() * maxFlyingObjects);
     const flyingObjectPosition = flyingObjectsStarterPositions[predefinedPosition];
     const newFlyingObject = {
@@ -27,7 +27,7 @@ export const createFlyingObject = (state: InitialStateType) => {
             y: flyingObjectsStarterYAxis,
         },
         createdAt: (new Date()).getTime(),
-        id,
+        id: uuidv4(),
     };
 
     return {

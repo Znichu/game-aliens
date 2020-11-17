@@ -10,10 +10,17 @@ export const moveObjects = (state: InitialStateType, action: any) => {
 
     const newState = createFlyingObject(state);
 
+    const now= (new Date()).getTime();
+    const newFlyingObjects = newState.flyingObjects.filter(obj => (
+        (now - obj.createdAt) < 4000
+    ));
+
     const {x, y} = mousePosition;
     const angle = calculateAngle(0, 0, x, y);
     return {
         ...newState,
+        flyingObjects: newFlyingObjects,
         angle,
+
     };
 }
