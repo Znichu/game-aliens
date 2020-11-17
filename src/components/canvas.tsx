@@ -5,6 +5,8 @@ import {CannonPipe} from "./cannon-pipe";
 import {CannonBase} from "./cannon-base";
 import {useSelector} from "react-redux";
 import {RootState} from "../store/store";
+import {CannonBall} from "./cannon-ball";
+import {positionBall} from "../utils/constant";
 
 type PropsType = {
     trackMouse: (event: React.MouseEvent<SVGSVGElement, MouseEvent>) => void
@@ -29,6 +31,7 @@ export const Canvas: React.FC<PropsType> = ({trackMouse}) => {
             <Ground />
             <CannonPipe rotation={rotation} />
             <CannonBase />
+            <CannonBall position={positionBall}/>
         </svg>
     );
 };

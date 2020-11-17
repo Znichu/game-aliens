@@ -1,14 +1,4 @@
-type ObjectType = {
-    x: number | string
-    y: number | string
-}
-
-type CubicBezierCurveType = {
-    initialAxis: ObjectType
-    initialControlPoint: ObjectType
-    endingControlPoint: ObjectType
-    endingAxis: ObjectType
-}
+import {CubicBezierCurveType} from "./types";
 
 export const pathFromBezierCurve = (cubicBezierCurve: CubicBezierCurveType) => {
     const {
