@@ -9,6 +9,7 @@ import {CannonBall} from "./cannon-ball";
 import {positionBall} from "../utils/constant";
 import {CurrentScore} from "./current-score";
 import {FlyingObject} from "./flying-object";
+import {Heart} from "./heart";
 
 type PropsType = {
     trackMouse: (event: React.MouseEvent<SVGSVGElement, MouseEvent>) => void
@@ -44,6 +45,8 @@ export const Canvas: React.FC<PropsType> = ({trackMouse}) => {
 
             <FlyingObject position={{x: -150, y: -500}}/>
             <FlyingObject position={{x: 150, y: -500}}/>
+            
+            <Heart position={{x: -300, y: 35}}/>
         </svg>
     );
 };
