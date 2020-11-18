@@ -36,6 +36,14 @@ export const Canvas: React.FC<PropsType> = ({trackMouse, shootBall}) => {
     const startGame = () => {
         dispatch(actions.runGame())
     }
+    const liveItems = [];
+    for (let i = 0; i < lives; i++) {
+        const heartPosition = {
+            x: -180 - (i * 70),
+            y: 55
+        };
+        liveItems.push(<Heart key={i} position={heartPosition}/>);
+    }
 
     return (
         <svg
@@ -59,7 +67,7 @@ export const Canvas: React.FC<PropsType> = ({trackMouse, shootBall}) => {
             <CannonBase/>
             <CurrentScore score={kills}/>
             {!started && <StartGame startGame={startGame}/>}
-            {<Heart position={{x: -300, y: 55}}/>}
+            {liveItems}
             {flyingObjects.map(obj => <FlyingObject key={obj.id} position={obj.position}/>)}
         </svg>
     );
