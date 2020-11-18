@@ -22,7 +22,14 @@ type PropsType = {
 export const Canvas: React.FC<PropsType> = ({trackMouse, shootBall}) => {
     const dispatch = useDispatch();
 
-    const {angle: rotation, started, flyingObjects, cannonBalls}= useSelector((state: RootState) => state.game)
+    const {
+        angle: rotation,
+        started,
+        flyingObjects,
+        cannonBalls,
+        lives,
+        kills
+    }= useSelector((state: RootState) => state.game)
 
     const viewBox = [window.innerWidth / -2, 100 -gameHeight, window.innerWidth, gameHeight].join();
 
@@ -50,9 +57,9 @@ export const Canvas: React.FC<PropsType> = ({trackMouse, shootBall}) => {
             {cannonBalls.map(ball =><CannonBall key={ball.id} position={ball.position}/>)}
             <CannonPipe rotation={rotation}/>
             <CannonBase/>
-            <CurrentScore score={15}/>
+            <CurrentScore score={kills}/>
             {!started && <StartGame startGame={startGame}/>}
-            <Heart position={{x: -300, y: 55}}/>
+            {<Heart position={{x: -300, y: 55}}/>}
             {flyingObjects.map(obj => <FlyingObject key={obj.id} position={obj.position}/>)}
         </svg>
     );

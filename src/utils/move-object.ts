@@ -20,6 +20,19 @@ export const moveObjects = (state: InitialStateType, action: any) => {
         (now - object.createdAt) < 4000
     ));
 
+    const lostLife = state.flyingObjects.length > flyingObjects.length;
+    let lives = state.lives;
+    if (lostLife) {
+        lives--;
+    }
+
+    const started = lives > 0;
+    if (!started) {
+        flyingObjects = [];
+        cannonBalls = [];
+        lives = 5;
+    }
+
     const {x, y} = mousePosition;
     const angle = calculateAngle(0, 0, x, y);
 
@@ -30,10 +43,15 @@ export const moveObjects = (state: InitialStateType, action: any) => {
     cannonBalls = cannonBalls.filter(cannonBall => (cannonBallsDestroyed.indexOf(cannonBall.id)));
     flyingObjects = flyingObjects.filter(flyingDisc => (flyingDiscsDestroyed.indexOf(flyingDisc.id)));
 
+    const kills = state.kills + flyingDiscsDestroyed.length;
+
     return {
         ...newState,
         flyingObjects,
         cannonBalls,
         angle,
+        lives,
+        kills,
+        started,
     };
 }

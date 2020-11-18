@@ -7,7 +7,7 @@ let initialState = {
     angle: 45,
     started: false,
     kills: 0,
-    lives: 3,
+    lives: 5,
     flyingObjects: [] as FlyingObjectType[],
     lastObjectCreatedAt: new Date(),
     cannonBalls: [] as CannonBallType[]
@@ -22,7 +22,8 @@ export const GameReducer = (state = initialState, action: ActionsTypes): Initial
         case "RUN_GAME": {
             return {
                 ...state,
-                started: true
+                started: true,
+                kills: 0
             }
         }
         case "SHOOT_BALL": {

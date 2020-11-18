@@ -1,7 +1,7 @@
 export const skyAndGroundWidth = 5000;
 export const gameWidth = 800;
 export const gameHeight = 1200;
-export const positionBall = {x: 0, y: -100};
+export const positionHeart = {x: -300, y: 55};
 
 export const createInterval = 1000;
 
